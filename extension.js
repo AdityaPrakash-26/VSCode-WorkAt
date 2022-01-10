@@ -52,8 +52,21 @@ function activate(context) {
 							// show quickpick of problems
 							vscode.window.showQuickPick(problems, {
 								placeHolder: 'Select a problem'
-							}).then(function(selection){
-								console.log(selection);
+							}).then(function(problemSelection){
+								// make get request to the problem
+								axios.get('https://workat.tech/api/ps/' + problemSelection)
+									.then(function(response){
+										// create a webview with response.content
+										vscode.window.createWebviewPanel('workat', 'workat', vscode.ViewColumn.One, {
+											enableScripts: true,
+											retainContextWhenHidden: true
+										}).webview.html = response.data.content;
+									})
+									.catch(function(error){
+										console.log(error);
+										// show error message
+										vscode.window.showErrorMessage('Error fetching the question');
+									});
 							});
 						});
 					})
