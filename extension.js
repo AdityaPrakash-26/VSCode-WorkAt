@@ -111,14 +111,25 @@ function activate(context) {
 											retainContextWhenHidden: true
 										});
 
-										problemView.webview.html = response.data.content;
+										problemView.webview.html += `
+											<!DOCTYPE html>
+											<html>
+												<head>
+													<meta charset="utf-8">
+													<meta name="viewport" content="width=device-width, initial-scale=1">
+												</head>
+												<body>
+												<h1>${response.data.name}</h1>
+											`
+
+										problemView.webview.html += response.data.content;
 
 										// button code
 
 										problemView.webview.html += `
 											<div style="text-align: left;">
 												<a href='https://workat.tech/problem-solving/practice/${problemSelection}' id="submit">
-													<button style="width: 100px; padding: 10px; font-size: 20px;" onclick="copy()">Submit</button>
+													<button style="width: 52px; padding: 6px; font-size: 12px; text-align: center;" onclick="copy()">Submit</button>
 												</a>
 											</div>
 											<p> 

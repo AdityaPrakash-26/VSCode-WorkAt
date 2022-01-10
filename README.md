@@ -1,65 +1,27 @@
-# vscode-workat README
+# VSCode-WorkAt
 
-This is the README for your extension "vscode-workat". After writing up a brief description, we recommend including the following sections.
+VSCode-WorkAt is an extension that lets you write code for [WorkAt.tech](https://workat.tech) in VSCode.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Choose a language from the dropdown menu and start writing your code. You can additionally access all of the topics, companies and lists made by WorkAt.tech.
 
-For example if there is an image subfolder under your extension project workspace:
+<img src="res/problem.png" alt="problem" style="width:600px;"/>
 
-\!\[feature X\]\(images/feature-x.png\)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Currently, it is not possible to submit the code from within VSCode. This is due to a security concern. As an immediate work-around, your code will be copied to your clipboard, and you will automatically be redirected to the respective problem's page on [workAt](https://workat.tech).
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+Initial release.
 
-### 1.0.1
+## Credits
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [Aditya Prakash](https://adityaprakash.tech) - Author & Developer
+- [WorkAt.tech Team](https://workat.tech) - For the platform & community. Helped me out with the API endpoints.
+- [developomp](https://github.com/developomp) - Helping me out with my questions and suggestions.
