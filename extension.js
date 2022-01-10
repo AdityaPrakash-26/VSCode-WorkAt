@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const axios = require('axios');
+const { workerData } = require('worker_threads');
 // const workAtChannel = require('src/workAtChannel.js');
 
 // this method is called when your extension is activated
@@ -57,10 +58,20 @@ function activate(context) {
 								axios.get('https://workat.tech/api/ps/' + problemSelection)
 									.then(function(response){
 										// create a webview with response.content
-										vscode.window.createWebviewPanel('workat', 'workat', vscode.ViewColumn.One, {
+										const problemView = vscode.window.createWebviewPanel('workat', response.data.name, vscode.ViewColumn.One, {
 											enableScripts: true,
 											retainContextWhenHidden: true
-										}).webview.html = response.data.content;
+										});
+
+										problemView.webview.html = response.data.content;
+
+										problemView.webview.html += `
+											<div style="text-align: left;">
+												<button style="width: 100px; padding: 10px; font-size: 20px;">Code Now</button>
+											</div>
+										`;
+
+
 									})
 									.catch(function(error){
 										console.log(error);
