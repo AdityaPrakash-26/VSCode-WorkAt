@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const axios = require('axios');
-const path = require('path');
+const fs = require('fs');
 // const workAtChannel = require('src/workAtChannel.js');
 
 // this method is called when your extension is activated
@@ -12,22 +12,8 @@ const path = require('path');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-workat" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vscode-workat.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from VSCode-Workat!');
-	});
-
 	// new command to get problems from workat
-	let disposable2 = vscode.commands.registerCommand('vscode-workat.getProblems', function () {
+	let getProblems = vscode.commands.registerCommand('vscode-workat.getProblems', function () {
 		try{
 			// show quickpick
 			vscode.window.showQuickPick(['Topics', 'Companies', 'Lists'], {
@@ -57,38 +43,64 @@ function activate(context) {
 								// make get request to the problem
 								axios.get('https://workat.tech/api/ps/' + problemSelection)
 									.then(async function(response){
-
+										var language;
 										// choose language before showing the problem
 										await vscode.window.showQuickPick(['C++', 'Java', 'Python'], {
 											placeHolder: 'Choose a language'
 										}).then(function(languageSelection){
 											if(languageSelection == 'C++'){
-												// create a new cpp file with filename as problemSelection
-												vscode.workspace.openTextDocument({
-													language: 'cpp',
-													content: response.data.languages[1235].defaultCode
-												}).then(function(document){
-													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
-													// save file
-													vscode.workspace.saveAll();
+												language = 'cpp';
+												// if practice folder does not exist
+												if(!fs.existsSync(vscode.workspace.rootPath + '/practice')){
+													// create practice folder
+													fs.mkdirSync(vscode.workspace.rootPath + '/practice');
+												}
+
+												// create and save the file
+												fs.writeFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.cpp', response.data.languages[1235].defaultCode, function(err){
+													if(err){
+														console.log(err);
+													}
+												});
+												// open the file in view column one
+												vscode.workspace.openTextDocument(vscode.Uri.file(vscode.workspace.rootPath + '/practice/' + problemSelection + '.cpp')).then(doc => {
+													vscode.window.showTextDocument(doc, vscode.ViewColumn.One);
 												});
 											}
 											else if(languageSelection == 'Java'){
-												// create a new java file with filename as problemSelection
-												vscode.workspace.openTextDocument({
-													language: 'java',
-													content: response.data.languages[1].defaultCode
-												}).then(function(document){
-													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+												language = 'java';
+												if(!fs.existsSync(vscode.workspace.rootPath + '/practice')){
+													// create practice folder
+													fs.mkdirSync(vscode.workspace.rootPath + '/practice');
+												}
+
+												// create and save the file
+												fs.writeFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.java', response.data.languages[1311].defaultCode, function(err){
+													if(err){
+														console.log(err);
+													}
+												});
+												// open the file in view column one
+												vscode.workspace.openTextDocument(vscode.Uri.file(vscode.workspace.rootPath + '/practice/' + problemSelection + '.java')).then(doc => {
+													vscode.window.showTextDocument(doc, vscode.ViewColumn.One);
 												});
 											}
 											else if(languageSelection == 'Python'){
-												// create a new python file with filename as problemSelection
-												vscode.workspace.openTextDocument({
-													language: 'python',
-													content: response.data.languages[2].defaultCode
-												}).then(function(document){
-													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+												language = 'python';
+												if(!fs.existsSync(vscode.workspace.rootPath + '/practice')){
+													// create practice folder
+													fs.mkdirSync(vscode.workspace.rootPath + '/practice');
+												}
+
+												// create and save the file
+												fs.writeFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.py', response.data.languages[1421].defaultCode, function(err){
+													if(err){
+														console.log(err);
+													}
+												});
+												// open the file in view column one
+												vscode.workspace.openTextDocument(vscode.Uri.file(vscode.workspace.rootPath + '/practice/' + problemSelection + '.py')).then(doc => {
+													vscode.window.showTextDocument(doc, vscode.ViewColumn.One);
 												});
 											}
 										});
@@ -103,12 +115,62 @@ function activate(context) {
 
 										// button code
 
-										// problemView.webview.html += `
-										// 	<div style="text-align: left;">
-										// 		<button style="width: 100px; padding: 10px; font-size: 20px;">Code Now</button>
-										// 	</div>
-										// `;
+										problemView.webview.html += `
+											<div style="text-align: left;">
+												<a href='https://workat.tech/problem-solving/practice/${problemSelection}' id="submit">
+													<button style="width: 100px; padding: 10px; font-size: 20px;" onclick="copy()">Submit</button>
+												</a>
+											</div>
+											<script>
+											(function() {
+												const vscode = acquireVsCodeApi();
+												const button = document.getElementById('submit');
+												button.addEventListener('click', function() {
+													vscode.postMessage({
+														command: 'copy',
+														text: 'HELLO WORLD'
+													});
+												});
+											})();
+											</script>
+										`;
 
+										// add onclick event to copy button
+										problemView.webview.onDidReceiveMessage(async message => {
+											if(message.command === 'copy'){
+												if(language === 'cpp'){
+													await fs.readFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.cpp', 'utf8', function(err, contents){
+														if(err){
+															console.log(err);
+														}
+														else{
+															vscode.env.clipboard.writeText(contents);
+														}
+													});
+												}
+												else if(language === 'java'){
+													await fs.readFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.java', 'utf8', function(err, contents){
+														if(err){
+															console.log(err);
+														}
+														else{
+															vscode.env.clipboard.writeText(contents);
+														}
+													});
+												}
+												else if(language === 'python'){
+													await fs.readFile(vscode.workspace.rootPath + '/practice/' + problemSelection + '.py', 'utf8', function(err, contents){
+														if(err){
+															console.log(err);
+														}
+														else{
+															vscode.env.clipboard.writeText(contents);
+														}
+													});
+												}
+											}
+										});
+										
 									})
 									.catch(function(error){
 										console.log(error);
@@ -132,8 +194,7 @@ function activate(context) {
 		}
 	})
 
-	context.subscriptions.push(disposable);
-	context.subscriptions.push(disposable2);
+	context.subscriptions.push(getProblems);
 }
 
 // this method is called when your extension is deactivated

@@ -13,9 +13,8 @@
   ],
   "repository": {
     "url": "https://github.com/AdityaPrakash-26/VSCode-WorkAt"
-},
+  },
   "activationEvents": [
-    "onCommand:vscode-workat.helloWorld",
     "onCommand:vscode-workat.getProblems"
   ],
   "main": "./extension.js",
@@ -48,6 +47,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "fs": "^0.0.1-security"
   }
 }
