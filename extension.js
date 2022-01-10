@@ -43,7 +43,18 @@ function activate(context) {
 						vscode.window.showQuickPick(topics, {
 							placeHolder: 'Select a topic to get problems'
 						}).then(function(selection){
-							console.log(selection);
+							// get the index of selection
+							let index = response.data.findIndex(function(topic){
+								return topic.title === selection;
+							});
+							// get problems of the index
+							let problems = response.data[index].problems;
+							// show quickpick of problems
+							vscode.window.showQuickPick(problems, {
+								placeHolder: 'Select a problem'
+							}).then(function(selection){
+								console.log(selection);
+							});
 						});
 					})
 					.catch(function (error) {
