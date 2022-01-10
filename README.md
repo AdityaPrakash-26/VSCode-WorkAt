@@ -18,9 +18,11 @@ Currently, it is not possible to submit the code from within VSCode. This is due
 
 ## Release Notes
 
-### 1.0.0
+### 1.0.3
 
-Initial release.
+Minor logo fix
+
+Check out the [Changelog](CHANGELOG.md) for more details.
 
 ## Credits
 
