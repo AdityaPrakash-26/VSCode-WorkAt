@@ -2,7 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const axios = require('axios');
-const { workerData } = require('worker_threads');
+const path = require('path');
 // const workAtChannel = require('src/workAtChannel.js');
 
 // this method is called when your extension is activated
@@ -56,21 +56,58 @@ function activate(context) {
 							}).then(function(problemSelection){
 								// make get request to the problem
 								axios.get('https://workat.tech/api/ps/' + problemSelection)
-									.then(function(response){
+									.then(async function(response){
+
+										// choose language before showing the problem
+										await vscode.window.showQuickPick(['C++', 'Java', 'Python'], {
+											placeHolder: 'Choose a language'
+										}).then(function(languageSelection){
+											if(languageSelection == 'C++'){
+												// create a new cpp file with filename as problemSelection
+												vscode.workspace.openTextDocument({
+													language: 'cpp',
+													content: response.data.languages[1235].defaultCode
+												}).then(function(document){
+													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+													// save file
+													vscode.workspace.saveAll();
+												});
+											}
+											else if(languageSelection == 'Java'){
+												// create a new java file with filename as problemSelection
+												vscode.workspace.openTextDocument({
+													language: 'java',
+													content: response.data.languages[1].defaultCode
+												}).then(function(document){
+													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+												});
+											}
+											else if(languageSelection == 'Python'){
+												// create a new python file with filename as problemSelection
+												vscode.workspace.openTextDocument({
+													language: 'python',
+													content: response.data.languages[2].defaultCode
+												}).then(function(document){
+													vscode.window.showTextDocument(document, vscode.ViewColumn.One);
+												});
+											}
+										});
+
 										// create a webview with response.content
-										const problemView = vscode.window.createWebviewPanel('workat', response.data.name, vscode.ViewColumn.One, {
+										const problemView = vscode.window.createWebviewPanel('workat', response.data.name, vscode.ViewColumn.Two, {
 											enableScripts: true,
 											retainContextWhenHidden: true
 										});
 
 										problemView.webview.html = response.data.content;
 
-										problemView.webview.html += `
-											<div style="text-align: left;">
-												<button style="width: 100px; padding: 10px; font-size: 20px;">Code Now</button>
-											</div>
-										`;
+										// button code
 
+										// problemView.webview.html += `
+										// 	<div style="text-align: left;">
+										// 		<button style="width: 100px; padding: 10px; font-size: 20px;">Code Now</button>
+										// 	</div>
+										// `;
 
 									})
 									.catch(function(error){
