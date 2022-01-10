@@ -21,10 +21,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-workat.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "vscode-workat.getProblems",
         "title": "Get Problems"
       }

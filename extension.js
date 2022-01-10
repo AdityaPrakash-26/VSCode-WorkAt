@@ -121,6 +121,11 @@ function activate(context) {
 													<button style="width: 100px; padding: 10px; font-size: 20px;" onclick="copy()">Submit</button>
 												</a>
 											</div>
+											<p> 
+												<b>Note:</b> Submitting via VS Code is currently not possible due to security concerns. After clicking the button, 
+												you will be redirected to the problem page, and the code you have written will be copied to your clipboard 
+												automatically. You can paste it into the editor and submit it.
+											</p>
 											<script>
 											(function() {
 												const vscode = acquireVsCodeApi();
