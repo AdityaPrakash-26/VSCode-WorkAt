@@ -1,40 +1,53 @@
 {
   "name": "vscode-workat",
-	"displayName": "VSCode-Workat",
-	"description": "A VSCode extension for solving problem on workat.tech",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.63.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-        "onCommand:vscode-workat.helloWorld"
-	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [{
-            "command": "vscode-workat.helloWorld",
-            "title": "Hello World"
-
-		}]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-        "@types/vscode": "^1.63.0",
-        "@types/glob": "^7.1.4",
-        "@types/mocha": "^9.0.0",
-        "@types/node": "14.x",
-        "eslint": "^8.1.0",
-        "glob": "^7.1.7",
-        "mocha": "^9.1.3",
-        "typescript": "^4.4.4",
-        "@vscode/test-electron": "^1.6.2"
-    }
-
+  "displayName": "VSCode-Workat",
+  "description": "A VSCode extension for solving problem on workat.tech",
+  "version": "0.0.1",
+  "icon": "res/icon.png",
+  "publisher": "AdityaPrakash",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "url": "https://github.com/AdityaPrakash-26/VSCode-WorkAt"
+},
+  "activationEvents": [
+    "onCommand:vscode-workat.helloWorld",
+    "onCommand:vscode-workat.getProblems"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-workat.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "vscode-workat.getProblems",
+        "title": "Get Problems"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.63.0",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^8.1.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.3",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
 }
