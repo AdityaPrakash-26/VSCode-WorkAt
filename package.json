@@ -3,7 +3,7 @@
   "displayName": "VSCode-Workat",
   "description": "A VSCode extension for solving problem on workat.tech",
   "version": "1.0.0",
-  "icon": "res/icon.png",
+  "icon": "res/logo.png",
   "publisher": "AdityaPrakash",
   "engines": {
     "vscode": "^1.63.0"
@@ -22,7 +22,8 @@
     "commands": [
       {
         "command": "vscode-workat.getProblems",
-        "title": "Get Problems"
+        "title": "Get Problems",
+        "icon": "res/logo.png"
       }
     ]
   },
