@@ -2,7 +2,7 @@
   "name": "vscode-workat",
   "displayName": "VSCode-Workat",
   "description": "A VSCode extension for solving problem on workat.tech",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "icon": "res/logo.png",
   "publisher": "AdityaPrakash",
   "engines": {
