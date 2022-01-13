@@ -129,7 +129,7 @@ function activate(context) {
 										problemView.webview.html += `
 											<div style="text-align: left;">
 												<a href='https://workat.tech/problem-solving/practice/${problemSelection}' id="submit">
-													<button style="width: 52px; padding: 6px; font-size: 12px; text-align: center;" onclick="copy()">Submit</button>
+													<button style="width: 52px; padding: 6px; font-size: 10px; text-align: center;" onclick="copy()">Submit</button>
 												</a>
 											</div>
 											<p> 
