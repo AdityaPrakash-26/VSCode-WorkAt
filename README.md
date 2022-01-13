@@ -18,9 +18,9 @@ Currently, it is not possible to submit the code from within VSCode. This is due
 
 ## Release Notes
 
-### 1.1.1
+### 1.1.2
 
-Minor design changes
+Updated `follow-redirects` to `v1.14.7`, which fixes a critical security vulnerability.
 
 Check out the [Changelog](CHANGELOG.md) for more details.
 
