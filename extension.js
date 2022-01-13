@@ -119,7 +119,7 @@ function activate(context) {
 													<meta name="viewport" content="width=device-width, initial-scale=1">
 												</head>
 												<body>
-												<h1>${response.data.name}</h1>
+												<h1><a href='https://workat.tech/problem-solving/practice/${problemSelection}'>${response.data.name}</a></h1>
 											`
 
 										problemView.webview.html += response.data.content;
