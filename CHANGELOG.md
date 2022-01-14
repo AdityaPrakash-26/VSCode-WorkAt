@@ -3,7 +3,11 @@
 All notable changes to the "vscode-workat" extension will be documented in this file.
 
 
-## [1.1.2] - Jan 13, 2022
+## [1.2.1] - Jan 14, 2022
+
+- Updated README.md with installation instructions.
+
+## [1.2.0] - Jan 13, 2022
 
 - Updated `follow-redirects` to `v1.14.7`, which fixes a critical security vulnerability.
 

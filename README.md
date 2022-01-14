@@ -12,15 +12,21 @@ Choose a language from the dropdown menu and start writing your code. You can ad
 
 Press **Ctrl+Shift+P** (**Cmd+Shift+P** on macOS) to open the command pallete. Then select **Get Problems** from the list. This will start an interactive prompt, where you can choose between solving problems topics-wise, or company-wise, or get a list of curated problems. This feature will be expanded to be GUI-based (via Activity Bar) in the future.
 
+## Installation
+
+You can directly install the extension from the [Marketplace](https://marketplace.visualstudio.com/items?itemName=AdityaPrakash.vscode-workat), or you can paste the following command into the terminal:
+
+    code --install-extension AdityaPrakash.vscode-workat
+
 ## Known Issues
 
 Currently, it is not possible to submit the code from within VSCode. This is due to a security concern. As an immediate work-around, when you click submit, your code will be copied to your clipboard, and you will automatically be redirected to the respective problem's page on [workAt](https://workat.tech).
 
 ## Release Notes
 
-### 1.1.2
+### 1.2.1
 
-Updated `follow-redirects` to `v1.14.7`, which fixes a critical security vulnerability.
+Updated README.md with installation instructions.
 
 Check out the [Changelog](CHANGELOG.md) for more details.
 
